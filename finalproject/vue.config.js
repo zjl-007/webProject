@@ -1,7 +1,19 @@
 
 module.exports = {
   configureWebpack: {
-    entry: './src/index.js'
+    entry: './src/main.js',
+    module: {
+      // rules: [
+      //   {
+      //     test: /\.vue/,
+      //     loader: [
+      //       'style-loader',
+      //       'css-loader',
+      //       'less-loader',
+      //     ]
+      //   }
+      // ]
+    },
   },
   devServer: {
     port: 8080,

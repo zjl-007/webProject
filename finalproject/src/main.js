@@ -3,6 +3,10 @@ import App from './App.vue'
 import router from "./router/router"
 import VueRouter from 'vue-router'
 import instance from "./router/axios"
+import '../plugins/element'
+import less from 'less'
+
+Vue.use(less);
 
 /**
  * css引入

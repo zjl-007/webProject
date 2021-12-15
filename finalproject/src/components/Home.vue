@@ -10,7 +10,7 @@
 export default {
   name: 'Home',
   created() {
-    //console.log(this);
+    console.log(this);
     this.$ajax({
       url: '/',
     }).then(res => {

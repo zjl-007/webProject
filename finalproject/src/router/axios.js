@@ -21,4 +21,19 @@ const instance = axios.create({
 //   }, (err) => {
 //     console.log(err);
 //   })
+instance.interceptors.response.use(function (response) {
+    // 对响应数据做点什么
+    if(response.data instanceof Array) {
+        for (let i = 0; i < response.data.length; i++) {
+            response.data[i] = JSON.parse(response.data[i])
+        }
+    }
+    console.log('---------------------');
+    console.log("数据返回：", response);
+    console.log('---------------------');
+    return response;
+  }, function (error) {
+    // 对响应错误做点什么
+    return Promise.reject(error);
+  });
 export default instance;

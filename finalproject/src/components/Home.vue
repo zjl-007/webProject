@@ -1,8 +1,5 @@
 <template>
   <div class="hello">
-    <button @click="start">开始</button>
-    <button @click="stop">停止</button>
-    <button @click="get">get</button>
   </div>
 </template>
 
@@ -10,9 +7,9 @@
 export default {
   name: 'Home',
   created() {
-    console.log(this);
     this.$ajax({
-      url: '/',
+      method: 'post',
+      url: '/home',
     }).then(res => {
       console.log("success");
       
@@ -20,38 +17,6 @@ export default {
     }).catch(err => {
       console.log(err);
     })
-  },
-  methods: {
-    start() {
-      this.$ajax({
-      url: '/start',
-      }).then(res => {
-        console.log("stop");
-        console.log(res.data);
-      }).catch(err => {
-        console.log(err);
-      })
-    },
-    stop() {
-      this.$ajax({
-      url: '/stop',
-      }).then(res => {
-        console.log("stop");
-        console.log(res.data);
-      }).catch(err => {
-        console.log(err);
-      })
-    },
-    get() {
-      this.$ajax({
-      url: '/get',
-      }).then(res => {
-        console.log("stop");
-        console.log(res.data);
-      }).catch(err => {
-        console.log(err);
-      })
-    }
   },
 }
 </script>

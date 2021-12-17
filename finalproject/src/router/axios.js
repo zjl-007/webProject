@@ -29,6 +29,10 @@ instance.interceptors.response.use(function (response) {
     //         response.data[i] = JSON.parse(response.data[i])
     //     }
     // }
+    if(response?.data?.code === 501) {
+      window.location.href = '/login'
+      window.sessionStorage.clear('token');
+    }
     console.log('---------------------');
     console.log("数据返回：", response);
     return response;

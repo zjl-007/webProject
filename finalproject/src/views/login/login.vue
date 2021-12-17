@@ -45,7 +45,7 @@ export default {
     return {
       form: {
         username: "admin",
-        password: "123456",
+        password: "admin",
       },
       rules: {
         username: [{ required: true, message: "请输入账号", trigger: "blur" }],
@@ -57,14 +57,23 @@ export default {
     loginBtn() {
       login(this.form)
         .then((res) => {
-          if(res.data.code !== 200) {
+          if (res.data.code !== 200) {
+            this.$message({
+              type: 'warning',
+              message: res.data.message,
+            })
             return;
           }
-          let token = res.data.token;
-          if(token) {
-            window.sessionStorage.setItem('token', token);
-            this.$router.push('/home');
+          let { token, id } = res.data;
+          if (token) {
+            window.sessionStorage.setItem("token", token);
+            window.sessionStorage.setItem("id", id);
+            this.$router.push("/home");
           }
+          this.$message({
+              type: 'success',
+              message: "登录成功",
+            })
         })
         .catch((err) => {
           console.log(err);

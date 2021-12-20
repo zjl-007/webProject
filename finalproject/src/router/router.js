@@ -1,26 +1,24 @@
 import VueRouter from 'vue-router'
 import Home from "../views/home/home.vue"
 import Login from "../views/login/login"
+import mainRouter from './childRouter/mainRouter'
 const routes = [
     {
-        path: '',
-        redirect: '/login',
+        path: '/',
+        name: 'Home',
+        component: Home,
+        children: mainRouter,
     },
     {
         path: '/login',
         name: 'Login',
         component: Login
     },
-    {
-        path: '/home',
-        name: 'Home',
-        component: Home,
-    }
 ]
 
 const router = new VueRouter({
     routes,
-    mode: 'hash',
+    mode: 'history',
 });
 
 router.beforeEach((to, from, next) => {

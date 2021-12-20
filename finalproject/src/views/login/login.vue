@@ -68,7 +68,7 @@ export default {
           if (token) {
             window.sessionStorage.setItem("token", token);
             window.sessionStorage.setItem("id", id);
-            this.$router.push("/home");
+            this.$router.push("/");
           }
           this.$message({
               type: 'success',

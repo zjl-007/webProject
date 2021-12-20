@@ -6,6 +6,10 @@
     <el-container>
       <home-aside></home-aside>
       <home-main></home-main>
+      <!-- <el-main>
+        <router-view> 
+        </router-view>
+      </el-main> -->
     </el-container>
   </el-container>
 </template>
@@ -25,7 +29,10 @@ export default {
 <style scoped>
 .el-header {
   padding: 0 !important;
-  height: 45px!important;
+  height: 45px !important;
   background-color: #ffffff;
+}
+.el-container {
+  height: 100%;
 }
 </style>

@@ -1,84 +1,84 @@
 <template>
-  <el-aside width="205px">
-    <el-radio-group v-model="isCollapse">
-      <el-radio-button :label="false">展开</el-radio-button>
-      <el-radio-button :label="true">收起</el-radio-button>
+  <div style="margin-top: 10px">
+    <el-radio-group>
+      <el-button  @click="changeMenu()">{{ isCollapse ? '展开' : '折叠' }}</el-button>
+      <!-- <el-radio-button :label="true">收起</el-radio-button> -->
     </el-radio-group>
     <el-menu
+      :router="true"
       default-active="1-4-1"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
       :collapse="isCollapse"
+        style="min-width: 70px"
     >
-      <el-submenu index="1">
+      <el-submenu
+        v-for="item in menuList"
+        :index="item.index"
+        :key="item.index"
+      >
         <template slot="title">
           <i class="el-icon-location"></i>
-          <span slot="title">导航一</span>
+          <span slot="title">{{ item.menuname }}</span>
         </template>
-        <el-menu-item-group>
-          <span slot="title">分组一</span>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <span slot="title">选项4</span>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
+        <el-menu-item
+          v-for="value in item.childrenMenuList"
+          :index="value.path"
+          :key="value.index"
+          >{{ value.menuname }}</el-menu-item
+        >
       </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
-      </el-menu-item>
     </el-menu>
-  </el-aside>
+  </div>
 </template>
 
 
 <script>
 import { queryMenus } from "../../../api/home/home";
-  export default {
-    data() {
-      return {
-        isCollapse: true
-      };
+export default {
+  data() {
+    return {
+      menuList: [],
+      isCollapse: true,
+    };
+  },
+  created() {
+    this.getMenus();
+  },
+  methods: {
+    changeMenu() {
+      this.isCollapse = !this.isCollapse;
+      console.log(this.isCollapse)
     },
-    created() {
-      this.getMenus();
-    },
-    methods: {
-      async getMenus() {
-        let id = window.sessionStorage.getItem('id');
-        const {data, message, code} = await queryMenus({id});
-        if(+code !== 200) {
-         
-          return;
-        }
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+    async getMenus() {
+      let id = window.sessionStorage.getItem("id");
+      const { data, message, code } = await queryMenus({ id });
+      if (+data.code !== 200) {
+        this.$message({
+          type: "warning",
+          message: message,
+        });
+        return;
       }
-    }
-  }
+      this.menuList = data.menuList;
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+  },
+};
 </script>
 
 <style>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 201px;
-    min-height: 400px;
-  }
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 201px;
+  min-height: 400px;
+}
+.el-menu {
+  min-width: 69px;
+}
 </style>

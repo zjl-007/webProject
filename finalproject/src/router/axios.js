@@ -12,6 +12,8 @@ instance.interceptors.request.use((config) => {
     //3.网络请求需要一些特殊的参数，例如token
     config.timeout = 10000
     config.headers.authorization = window.sessionStorage.getItem('token') || '';
+    console.log('------request--------');
+    console.log("请求数据：", config.data);
     //console.log(window.sessionStorage.getItem('token'));
     return config
   }, (err) => {
@@ -33,7 +35,7 @@ instance.interceptors.response.use(function (response) {
       window.location.href = '/login'
       window.sessionStorage.clear('token');
     }
-    console.log('---------------------');
+    console.log('------response--------');
     console.log("数据返回：", response);
     return response;
   }, function (error) {

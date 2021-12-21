@@ -4,7 +4,9 @@
     <span></span>
     <div class="top_ri">
       <span>用户名：{{ userInfo.username }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <el-button type="primary" size="mini" @click="loginOut">退出</el-button>
+      <el-button type="primary" size="mini" @click="loginOut"
+        style="margin-right: 20px"
+      >退出</el-button>
     </div>
   </div>
   <!-- </el-header> -->

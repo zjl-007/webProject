@@ -2,7 +2,7 @@ import instance from '../../router/axios';
 
 export const queryUserInfo = (params) => {
     return instance({
-        url: '/getUserInfo',
+        url: '/getNowUserInfo',
         method: 'post',
         data: params
     })

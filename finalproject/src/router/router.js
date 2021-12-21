@@ -5,7 +5,7 @@ import mainRouter from './childRouter/mainRouter'
 const routes = [
     {
         path: '/',
-        name: 'Home',
+        // name: 'Home',
         component: Home,
         children: mainRouter,
     },

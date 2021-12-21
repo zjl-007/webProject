@@ -55,29 +55,38 @@ export default {
   },
   methods: {
     loginBtn() {
-      login(this.form)
-        .then((res) => {
-          if (res.data.code !== 200) {
+      this.$refs.form.validate((valid) => {
+        // if (!valid) {
+        //   this.$message({
+        //     type: "warning",
+        //     message: "请检查输入项",
+        //   });
+        //   return;
+        // }
+        login(this.form)
+          .then((res) => {
+            if (res.data.code !== 200) {
+              this.$message({
+                type: "warning",
+                message: res.data.message,
+              });
+              return;
+            }
+            let { token, id } = res.data;
+            if (token) {
+              window.sessionStorage.setItem("token", token);
+              window.sessionStorage.setItem("id", id);
+              this.$router.push("/");
+            }
             this.$message({
-              type: 'warning',
-              message: res.data.message,
-            })
-            return;
-          }
-          let { token, id } = res.data;
-          if (token) {
-            window.sessionStorage.setItem("token", token);
-            window.sessionStorage.setItem("id", id);
-            this.$router.push("/");
-          }
-          this.$message({
-              type: 'success',
+              type: "success",
               message: "登录成功",
-            })
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
     },
   },
 };

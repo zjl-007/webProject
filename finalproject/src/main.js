@@ -4,6 +4,7 @@ import router from "./router/router"
 import VueRouter from 'vue-router'
 import instance from "./router/axios"
 import '../plugins/element'
+import '../plugins/echarts'
 import less from 'less'
 
 Vue.use(less);

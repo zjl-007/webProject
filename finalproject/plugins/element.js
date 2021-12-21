@@ -19,12 +19,18 @@ import {
     Menu,
     MenuItem,
     Submenu,
-    MenuItemGroup
+    MenuItemGroup,
+    Table,
+    TableColumn,
+    Select,
+    Switch
 } from 'element-ui';
 
 Vue.use(Button);
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox;
+Vue.use(Select);
+Vue.use(Switch);
 Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Input);
@@ -41,3 +47,5 @@ Vue.use(Menu);
 Vue.use(MenuItem);
 Vue.use(Submenu);
 Vue.use(MenuItemGroup);
+Vue.use(Table);
+Vue.use(TableColumn);

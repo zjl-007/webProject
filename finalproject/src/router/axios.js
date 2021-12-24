@@ -1,11 +1,12 @@
 import axios from "axios";
-import baseUrl from '../dev/baseUrl'
+// import baseUrl from '../dev/baseUrl'
 const instance = axios.create({
-    baseURL: baseUrl,
+    // baseUrl: baseUrl,
     withCredentials: false,
-    method: 'get',
+    method: 'post',
     timeout: 5000,
 });
+// console.log(process)
 instance.interceptors.request.use((config) => {
     //1.config中的信息不合规范
     //2.发送请求时，希望在界面显示加载图标
@@ -13,7 +14,7 @@ instance.interceptors.request.use((config) => {
     config.timeout = 10000
     config.headers.authorization = window.sessionStorage.getItem('token') || '';
     console.log('------request--------');
-    console.log("请求数据：", config.data);
+    console.log("请求url：", config.url, ";请求数据：",config.data);
     //console.log(window.sessionStorage.getItem('token'));
     return config
   }, (err) => {

@@ -23,7 +23,7 @@ module.exports = {
       '': {
         target: 'http://127.0.0.1:3999',
         ws: true,
-        changOrigin: true,
+        changeOrigin: true,
         pathRewrite: {
           '^/api': ''
         }

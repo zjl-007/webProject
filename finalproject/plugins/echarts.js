@@ -1,3 +1,3 @@
-import echarts from "echarts";
+import * as echarts from 'echarts';
 import Vue from 'vue';
 Vue.prototype.$echarts = echarts

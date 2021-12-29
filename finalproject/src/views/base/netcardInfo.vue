@@ -9,13 +9,13 @@
         width="180"
         :show-overflow-tooltip="true"
       />
-      <el-table-column prop="address" label="地址" width="130" align="center" />
-      <el-table-column prop="subnet" label="掩码" width="130" align="center" />
+      <el-table-column prop="address" label="IPv4地址" width="130" align="center" />
+      <el-table-column prop="subnet" label="子网掩码" width="130" align="center" />
       <el-table-column prop="broadcast" label="广播地址" width="130" align="center" />
-      <el-table-column prop="netcd_mac" label="mac地址" align="center"/>
-      <el-table-column prop="addressV6" label="地址" align="center" :show-overflow-tooltip="true"/>
+      <el-table-column prop="netcd_mac" label="MAC地址" align="center"/>
+      <el-table-column prop="addressV6" label="IPv6地址" align="center" :show-overflow-tooltip="true"/>
       <el-table-column prop="description" label="描述" align="center" :show-overflow-tooltip="true"/>
-      <el-table-column prop="datalink_description" label="网络类型" align="center"/>
+      <el-table-column prop="datalink_description" label="网卡类型" align="center"/>
     </el-table>
   </div>
 </template>
@@ -44,11 +44,9 @@ export default {
           return;
         }
         devices.forEach((item) => {
-          let {address: addressV6} = {...item?.addresses[0]};
-          this.tableData.push({ ...item, ...item?.addresses[1], addressV6 });
+          let {address: addressV6} = {...item.addresses[0]};
+          this.tableData.push({ ...item, ...item.addresses[item.addresses.length - 1], addressV6 });
         });
-
-        console.log(this.tableData);
       } catch (error) {
         console.log(error);
       }

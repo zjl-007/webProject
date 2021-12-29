@@ -4,7 +4,7 @@
       <div class="logo">
         <img src="../../assets/logo.png" alt="" />
       </div>
-      <h3 class="title">系统</h3>
+      <h3 class="title">网络流量实时监测系统</h3>
       <el-form
         ref="form"
         :model="form"
@@ -56,13 +56,13 @@ export default {
   methods: {
     loginBtn() {
       this.$refs.form.validate((valid) => {
-        // if (!valid) {
-        //   this.$message({
-        //     type: "warning",
-        //     message: "请检查输入项",
-        //   });
-        //   return;
-        // }
+        if (!valid) {
+          this.$message({
+            type: "warning",
+            message: "请检查输入项",
+          });
+          return;
+        }
         login(this.form)
           .then((res) => {
             if (res.data.code !== 200) {
@@ -130,7 +130,7 @@ export default {
   .title {
     font-size: 22px;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import baseUrl from '../dev/baseUrl'
+// import baseUrl from '../dev/baseUrl'
 const instance = axios.create({
     baseURL: baseUrl,
     withCredentials: false,
@@ -10,7 +10,7 @@ instance.interceptors.request.use((config) => {
     //1.config中的信息不合规范
     //2.发送请求时，希望在界面显示加载图标
     //3.网络请求需要一些特殊的参数，例如token
-    config.timeout = 10000
+    config.timeout = 50000
     config.headers.authorization = window.sessionStorage.getItem('token') || '';
     console.log('------request--------');
     console.log("请求数据：", config.data);

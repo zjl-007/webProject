@@ -6,7 +6,7 @@ import netcardInfo from "../../views/base/netcardInfo"
 export default [
     {
         path: '',
-        redirect: 'sys/userInfo'
+        redirect: 'base/netcardInfo'
     },
     {
         path: 'sys/userInfo',

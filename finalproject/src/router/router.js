@@ -4,7 +4,7 @@ import Login from "../views/login/login"
 import mainRouter from './childRouter/mainRouter'
 const routes = [
     {
-        path: '/',
+        path: '',
         // name: 'Home',
         component: Home,
         children: mainRouter,

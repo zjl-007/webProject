@@ -53,15 +53,15 @@ export default {
     },
     async getMenus() {
       let id = window.sessionStorage.getItem("id");
-      const { data, message, code } = await queryMenus({ id });
-      if (+data.code !== 200) {
+      const { data: {menuList, code, message} } = await queryMenus({ id });
+      if (+code !== 200) {
         this.$message({
           type: "warning",
           message: message,
         });
         return;
       }
-      this.menuList = data.menuList;
+      this.menuList = menuList;
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

@@ -3,12 +3,12 @@
     <el-button size="mini" @click="startCapture">开始</el-button>
     <el-button size="mini" @click="stopCapture">停止</el-button>
     <el-button size="mini" @click="getCapture">获取</el-button>
-    <el-button size="mini" @click="getDevices">netcard</el-button>
+    <el-button size="mini" @click="saveData">保存</el-button>
   </div>
 </template>
 
 <script>
-import { startCapture, stopCapture, getCapture, getDevices } from "../../api/flow/capture";
+import { startCapture, stopCapture, getCapture, toSaveData } from "../../api/flow/capture";
 export default {
   name: "Capture",
   data() {
@@ -40,9 +40,10 @@ export default {
         console.log(error);
       }
     },
-    async getDevices() {
+    async saveData() {
+      let id = window.sessionStorage.getItem('id');
       try {
-        const res = await getDevices();
+        const res = await toSaveData({id});
         console.log(res);
       } catch (error) {
         console.log(error);

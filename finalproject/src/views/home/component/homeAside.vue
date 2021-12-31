@@ -1,7 +1,9 @@
 <template>
-  <div style="margin-top: 10px">
+  <div style="margin-top: 10px; background-color: #fff">
     <el-radio-group>
-      <el-button  @click="changeMenu()">{{ isCollapse ? '展开' : '折叠' }}</el-button>
+      <el-button @click="changeMenu()">{{
+        isCollapse ? "展开" : "折叠"
+      }}</el-button>
       <!-- <el-radio-button :label="true">收起</el-radio-button> -->
     </el-radio-group>
     <el-menu
@@ -11,7 +13,7 @@
       @open="handleOpen"
       @close="handleClose"
       :collapse="isCollapse"
-        style="min-width: 70px"
+      style="min-width: 70px; border: 0"
     >
       <el-submenu
         v-for="item in menuList"
@@ -49,19 +51,28 @@ export default {
   methods: {
     changeMenu() {
       this.isCollapse = !this.isCollapse;
-      console.log(this.isCollapse)
+      console.log(this.isCollapse);
     },
     async getMenus() {
       let id = window.sessionStorage.getItem("id");
-      const { data: {menuList, code, message} } = await queryMenus({ id });
-      if (+code !== 200) {
+      try {
+        const {
+          data: { menuList, code, message },
+        } = await queryMenus({ id });
+        if (+code !== 200) {
+          this.$message({
+            type: "warning",
+            message: message,
+          });
+          return;
+        }
+        this.menuList = menuList;
+      } catch (error) {
         this.$message({
           type: "warning",
-          message: message,
+          message: "系统错误",
         });
-        return;
       }
-      this.menuList = menuList;
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

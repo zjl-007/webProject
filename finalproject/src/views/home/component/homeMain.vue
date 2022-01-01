@@ -1,13 +1,10 @@
 <template>
-<div class="el-main">
-  <router-view>
-      
-    </router-view>
-</div>
+  <!-- <el-card class="box-card"><router-view /></el-card> -->
+  <div class="el-main">
+    <router-view />
+  </div>
   <!-- <el-main>
-    <router-view>
-      
-    </router-view>
+    router-view />
   </el-main> -->
 </template>
 

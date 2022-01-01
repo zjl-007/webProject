@@ -23,12 +23,16 @@ import {
     Table,
     TableColumn,
     Select,
-    Switch
+    Switch,
+    Pagination,
+    Option
 } from 'element-ui';
 
 Vue.use(Button);
+Vue.use(Option);
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox;
+Vue.use(Pagination);
 Vue.use(Select);
 Vue.use(Switch);
 Vue.use(Form);

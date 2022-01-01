@@ -16,7 +16,7 @@ import "./styles/base.css"
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.prototype.$ajax = instance;
-new Vue({
+window.vm = new Vue({
   render: h => h(App),
   router
 }).$mount('#app')

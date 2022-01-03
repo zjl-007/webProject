@@ -21,6 +21,7 @@ export default [
 
     {
         path: 'flow/capture',
+        name: 'capture',
         component: capture,
     },
     {

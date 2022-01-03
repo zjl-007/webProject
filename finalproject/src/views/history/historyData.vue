@@ -11,6 +11,7 @@
       :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" 
       border style="width: 100%" :fit="true">
       <el-table-column type="selection" width="55" align="center"/> 
+      <el-table-column type="index" label="序号" width="55" align="center"/>
       <el-table-column prop="Caplen" label="数据长度" width="80" align="center"/>
       <el-table-column prop="ContractType" label="协议类型" :sortable="true" width="100" align="center"/>
       <el-table-column prop="SecTime" label="请求时间" align="center" :sortable="true" :showOverflowTooltip="true"> 
@@ -19,7 +20,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="SourceIp" label="源IP" width="150" align="center"/>
-      <el-table-column prop="SourceMacAddr" la bel="源MAC地址" width="150" align="center"/>
+      <el-table-column prop="SourceMacAddr" label="源MAC地址" width="150" align="center"/>
       <el-table-column prop="SourcePort" label="源端口" width="80" align="center"/> 
       <el-table-column prop="TargetIp" label="目标IP" width="150" align="center"/>
       <el-table-column prop="TargetMacAddr" label="目标MAC地址" width="150" align="center"/>
@@ -44,7 +45,6 @@ let id = window.sessionStorage.getItem("id");
 import {
   getUserHistory,
   delUserHistory,
-  delAllHistory,
   delHistoryData,
 } from "../../api/history/history";
 export default {
@@ -71,7 +71,6 @@ export default {
       return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');   
     },
     async initData() {
-      let id = window.sessionStorage.getItem("id");
       try {
         let { code, message, data } = await getUserHistory({ id });
         if (+code !== 200) {
@@ -102,7 +101,7 @@ export default {
         type: "warning",
       }).then(async() => {
         try {
-          let { code, message, data } = await delUserHistory({id});
+          let { code, message } = await delUserHistory({id});
           if (+code !== 200) {
             this.$message({
               type: "warning",

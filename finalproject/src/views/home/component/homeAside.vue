@@ -12,7 +12,9 @@
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
+     active-text-color="#007acc"
       :collapse="isCollapse"
+      unique-opened
       style="min-width: 70px; border: 0"
     >
       <el-submenu

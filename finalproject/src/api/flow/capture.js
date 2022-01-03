@@ -4,7 +4,8 @@ let urlList = [
   '/stopCapture', 
   '/getCapture', 
   '/getDevices', 
-  '/toSaveData'];
+  '/toSaveData',
+  '/getCaptureState'];
 let requestObj = {}; 
 urlList.forEach(url => {
   requestObj[url] = function(params) {
@@ -21,12 +22,14 @@ const stopCapture = requestObj['/stopCapture'];
 const getCapture = requestObj['/getCapture'];
 const getDevices = requestObj['/getDevices'];
 const toSaveData = requestObj['/toSaveData'];
+const getCaptureState = requestObj['/getCaptureState'];
 export {
   startCapture,
   stopCapture,
   getCapture,
   getDevices,
-  toSaveData
+  toSaveData,
+  getCaptureState
 }
 
 

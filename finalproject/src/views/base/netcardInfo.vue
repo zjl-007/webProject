@@ -13,7 +13,7 @@
       />
       <el-table-column prop="address" label="IPv4地址" width="130" align="center">
         <template slot-scope="{row}">
-          <span v-if="row.address != row.addressV6">{{ row.address }}}</span>
+          <span v-if="row.address != row.addressV6">{{ row.address }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="subnet" label="子网掩码" width="130" align="center" />

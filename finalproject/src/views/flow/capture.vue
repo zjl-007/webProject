@@ -244,12 +244,13 @@ export default {
             this.$confirm('若长时间未抓取到数据，请检查查询参数是否正确！', '提示', {
               confirmButtonText: '继续抓取',
               cancelButtonText: '取消抓取',
+              closeOnClickModal: false,
               type: 'warning'
             }).then(() => {
-              
             }).catch(() => {
               clearInterval(captureTimer);
               clearTimeout(checkTimer);
+              this.isCaptureing = false;
             })
           }
         }, 10000)
@@ -273,6 +274,7 @@ export default {
       this.startCapture();
     },
     async stopCapture() {
+      clearTimeout(checkTimer);
       try {
         const res = await stopCapture();
         console.log(res);

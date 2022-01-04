@@ -4,9 +4,13 @@
     <span></span>
     <div class="top_ri">
       <span>用户名：{{ userInfo.username }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <el-button type="primary" size="mini" @click="loginOut"
+      <el-button
+        type="primary"
+        size="mini"
+        @click="loginOut"
         style="margin-right: 20px"
-      >退出</el-button>
+        >退出</el-button
+      >
     </div>
   </div>
   <!-- </el-header> -->
@@ -14,6 +18,7 @@
 
 <script>
 import { queryUserInfo } from "../../../api/home/home";
+import { getCaptureState } from "../../../api/flow/capture";
 export default {
   name: "HomeHeader",
   data() {
@@ -44,7 +49,20 @@ export default {
         this.userInfo = res.data.data;
       });
     },
-    loginOut() {
+    async loginOut() {
+      try {
+        let { code, captureState } = await getCaptureState();
+        if (+code != 200) {
+          return;
+        }
+        debugger
+        if (captureState) {
+          this.$message.error('正在抓包中，请先停止抓包再退出系统');
+          return
+        }
+      } catch (error) {
+        this.$message.error("获取抓包状态失败！");
+      }
       this.$confirm("退出系统, 是否继续?", "提示", {
         confirmButtonText: "确定",
         type: "warning",

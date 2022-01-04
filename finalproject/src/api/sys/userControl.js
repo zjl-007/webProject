@@ -7,3 +7,12 @@ export const queryUserList = (params) => {
     data: params
   })
 }
+
+
+export const editUserInfo = (params) => {
+  return instance({
+    url: '/editUserInfo',
+    method: 'post',
+    data: params
+  })
+}

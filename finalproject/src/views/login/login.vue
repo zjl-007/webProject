@@ -4,7 +4,8 @@
       <div class="logo">
         <img src="../../assets/logo.png" alt="" />
       </div>
-      <h3 class="title">网络流量实时监测系统</h3>
+      <!-- <h3 class="title">网络流量实时监测系统</h3> -->
+      <h3 class="title">系统</h3>
       <el-form
         ref="form"
         :model="form"

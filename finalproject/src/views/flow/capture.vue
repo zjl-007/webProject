@@ -227,15 +227,15 @@ export default {
       return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');   
     },
     async startCapture() {
-      this.isCaptureing = true;
-      this.tableData = []
       try {
         let params = {...this.formData}
-        let { message } = await startCapture(params);
-        this.$message({
-          type: "success",
-          message: message,
-        });
+        let {code, message } = await startCapture(params);
+        if(+code != 200) {
+          return this.$message({type: 'warning', message})
+        }
+        this.isCaptureing = true;
+        this.tableData = []
+        this.$message({type: "success",message});
         captureTimer = setInterval(() => {
           this.getCapture();
         }, 500);
@@ -255,10 +255,9 @@ export default {
           }
         }, 10000)
       } catch (error) {
-        this.$message({
-          type: "warning",
-          message: error,
-        });
+        this.$message.error(error);
+        clearInterval(captureTimer);
+        clearTimeout(checkTimer);
       }
     },
     async start() {
@@ -274,7 +273,6 @@ export default {
       this.startCapture();
     },
     async stopCapture() {
-      clearTimeout(checkTimer);
       try {
         const res = await stopCapture();
         console.log(res);
@@ -290,6 +288,9 @@ export default {
       try {
         let { message, code , data } = await getCapture();
         if(+code !== 200) {
+          clearInterval(captureTimer);
+          clearTimeout(checkTimer);
+          this.stopCapture();
           this.$message({type: 'warning', message: message});
           return;
         }
@@ -297,13 +298,13 @@ export default {
       } catch (error) {
         this.$message.error("系统错误，错误信息："+error);
         clearInterval(captureTimer);
+        this.stopCapture();
       } finally {
         if(this.tableData.length == this.formData.total) {
           clearInterval(captureTimer);
           clearTimeout(checkTimer);
           this.isCaptureing = false;
         }
-        // console.log(captureTimer);
       }
     },
     async saveData() {

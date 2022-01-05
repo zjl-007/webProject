@@ -55,7 +55,6 @@ export default {
         if (+code != 200) {
           return;
         }
-        debugger
         if (captureState) {
           this.$message.error('正在抓包中，请先停止抓包再退出系统');
           return

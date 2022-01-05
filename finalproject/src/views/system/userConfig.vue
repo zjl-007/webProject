@@ -64,7 +64,6 @@ export default {
           return;
         }
         this.tableData = userList;
-        console.log(this.tableData);
       } catch (e) {
         this.$message({
           type: "warning",

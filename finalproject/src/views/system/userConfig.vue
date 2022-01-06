@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="head">
+      <el-button @click="addUser" type="primary" size="small">添加用户</el-button>
+    </div>
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column type="index" width="55" />
       <el-table-column prop="username" label="账户名称" align="center" width="100" />
@@ -30,7 +33,7 @@
       <el-table-column label="信息权限管理" align="center" min-width="200">
         <template slot-scope="{row}" v-if="row.role != 0">
           <el-button type="primary" size="mini" @click="editUser(row)">编辑</el-button>
-          <el-button type="danger" size="mini">删除用户</el-button>
+          <el-button type="danger" size="mini" @click="delUser(row)">删除用户</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -39,7 +42,7 @@
 </template>
 
 <script>
-import { queryUserList } from "../../api/sys/userControl";
+import { queryUserList,delUser } from "../../api/sys/userControl";
 import dialogPowerAndInfo from "./dialogPowerAndInfo.vue"
 export default {
   components: { dialogPowerAndInfo },
@@ -72,8 +75,25 @@ export default {
       }
     },
     editUser(row) {
-      this.$refs.dialog.show(row);
+      this.$refs.dialog.show(row, 'edit');
     },
+    async addUser(row) {
+      this.$refs.dialog.show(row, 'add');
+    },
+    async delUser(row) {
+      try {
+        let id = row.idusers;
+        let {code, data, message } = await delUser({id});
+        if(+code != 200) {
+          return this.$message.error(message);
+        }
+        this.$message({type: 'success', message});
+      } catch (error) {
+        this.$message.error(error);
+      } finally {
+        this.getUserList();
+      }
+    }
   },
 };
 </script>

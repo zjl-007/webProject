@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>用户信息管理</h3>
     <div class="head">
       <el-button @click="addUser" type="primary" size="small">添加用户</el-button>
     </div>
@@ -97,3 +98,8 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+.head .el-button {
+    margin-bottom: 20px;
+}
+</style>

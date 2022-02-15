@@ -13,5 +13,6 @@
 .el-main {
   margin: 10px 10px 0 10px;
   background-color: #ffffff;
+  min-width: 1290px;
 }
 </style>

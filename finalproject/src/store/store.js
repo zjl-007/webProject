@@ -1,6 +1,7 @@
 export const store = {
     state: {
         devices: [],
+        chartData: {},
     },
     setDevices(devices) {
         this.state.devices = devices;
@@ -10,5 +11,11 @@ export const store = {
     },
     clearDevices() {
         this.state.devices = [];
+    },
+    getChartData() {
+        return this.state.chartData;
+    },
+    setChartData(data) {
+        this.state.chartData = data;
     }
 }

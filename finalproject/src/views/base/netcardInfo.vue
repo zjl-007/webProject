@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" size="small" @click="getDevices">刷新列表</el-button>
+    <el-button type="primary" icon="el-icon-refresh" size="small" :disabled="loading" @click="getDevices">刷新列表</el-button>
     <el-table :data="tableData" border size="small" style="width: 100%" v-loading="loading" element-loading-text="拼命加载中">
       <el-table-column type="index" label="序号" align="center" />
       <el-table-column prop="id" label="ID" width="50" align="center" />

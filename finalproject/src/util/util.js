@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export const getObjType = obj => {
   var toString = Object.prototype.toString;
   var map = {
@@ -39,3 +41,5 @@ export const deepClone = data => {
   }
   return obj;
 };
+
+export const eventBus = new Vue();

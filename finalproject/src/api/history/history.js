@@ -3,7 +3,8 @@ let urlList = [
   '/getUserHistory', 
   '/delUserHistoryData', 
   '/delAllHistoryData', 
-  '/delHistoryData'
+  '/delHistoryData',
+  '/getUserChartHistory',
 ];
 let requestObj = {}; 
 urlList.forEach(url => {
@@ -17,6 +18,7 @@ urlList.forEach(url => {
   // requestObj.push()
 })
 const getUserHistory = requestObj['/getUserHistory'];
+const getUserChartHistory = requestObj['/getUserChartHistory'];
 const delUserHistory = requestObj['/delUserHistoryData'];
 const delAllHistory = requestObj['/delAllHistoryData'];
 const delHistoryData = requestObj['/delHistoryData'];
@@ -24,5 +26,6 @@ export {
   getUserHistory,
   delUserHistory,
   delAllHistory,
-  delHistoryData
+  delHistoryData,
+  getUserChartHistory,
 }

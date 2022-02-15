@@ -127,6 +127,9 @@ export default {
         border-radius: 50%;
       }
     }
+    h3 {
+      padding-bottom: 0px;
+    }
   }
   .title {
     font-size: 22px;
@@ -134,4 +137,5 @@ export default {
     margin-top: 25px;
   }
 }
+
 </style>

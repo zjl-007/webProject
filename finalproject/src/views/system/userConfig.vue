@@ -2,7 +2,7 @@
   <div>
     <h3>用户信息管理</h3>
     <div class="head">
-      <el-button @click="addUser" type="primary" size="small">添加用户</el-button>
+      <el-button @click="addUser" icon="el-icon-circle-plus-outline" type="primary" size="small">添加用户</el-button>
     </div>
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column type="index" width="55" />
@@ -33,8 +33,8 @@
       </el-table-column>
       <el-table-column label="信息权限管理" align="center" min-width="200">
         <template slot-scope="{row}" v-if="row.role != 0">
-          <el-button type="primary" size="mini" @click="editUser(row)">编辑</el-button>
-          <el-button type="danger" size="mini" @click="delUser(row)">删除用户</el-button>
+          <el-button type="primary" icon="el-icon-edit" size="mini" @click="editUser(row)">编辑</el-button>
+          <el-button type="danger" icon="el-icon-delete" size="mini" @click="delUser(row)">删除用户</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -82,18 +82,29 @@ export default {
       this.$refs.dialog.show(row, 'add');
     },
     async delUser(row) {
-      try {
-        let id = row.idusers;
-        let {code, data, message } = await delUser({id});
-        if(+code != 200) {
-          return this.$message.error(message);
+      this.$confirm('此操作将永久删除该用户及数据文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        try {
+          let id = row.idusers;
+          let {code, data, message } = await delUser({id});
+          if(+code != 200) {
+            return this.$message.error(message);
+          }
+          this.$message({type: 'success', message});
+        } catch (error) {
+          this.$message.error(error);
+        } finally {
+          this.getUserList();
         }
-        this.$message({type: 'success', message});
-      } catch (error) {
-        this.$message.error(error);
-      } finally {
-        this.getUserList();
-      }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });          
+      });
     }
   },
 };

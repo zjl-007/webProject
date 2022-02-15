@@ -1,5 +1,6 @@
 import userInfo from "../../views/system/userInfo"
 import userConfig from "../../views/system/userConfig"
+import sysConfig from "../../views/system/sysConfig"
 import capture from "../../views/flow/capture"
 import flowInfo from "../../views/flow/flowInfo"
 import netcardInfo from "../../views/base/netcardInfo"
@@ -18,7 +19,10 @@ export default [
         path: 'sys/userConfig',
         component: userConfig,
     },
-
+    {
+        path: 'sys/sysConfig',
+        component: sysConfig,
+    },
     {
         path: 'flow/capture',
         name: 'capture',

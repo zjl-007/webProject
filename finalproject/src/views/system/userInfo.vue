@@ -30,8 +30,8 @@
         <el-form-item label="数据库权限">
           <span>{{ uesrData.powerdb ? '读写' : '仅读'}}</span>
         </el-form-item>
-        <el-button @click="getCurrentUserInfo" type="success">恢复</el-button>
-        <el-button @click="submit" type="primary">提交</el-button>
+        <el-button @click="getCurrentUserInfo" icon="el-icon-refresh-right" type="success">恢复</el-button>
+        <el-button @click="submit" icon="el-icon-top" type="primary">提交</el-button>
       </el-form>
     </div>
   </el-card>
